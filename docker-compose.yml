@@ -1,0 +1,19 @@
+version: '2.1'
+
+services: 
+  gnuradio_linux:
+    build: ./
+    volumes:
+      - ~/.Xauthority:/tmp/xauth
+      - /tmp/.X11-unix/:/tmp/
+      - /var/tmp:/var/tmp
+    environment: 
+      - XAUTHORITY=/tmp/xauth
+      - DISPLAY=$DISPLAY
+    network_mode: host
+  gnuradio_windows:
+    build: ./
+    environment:
+      - DISPLAY=${ip}:0.0
+    stdin_open: true
+    tty: true
